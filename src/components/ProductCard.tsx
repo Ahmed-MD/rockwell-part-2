@@ -1,4 +1,6 @@
-import { componentTokens, fontWeight, colors } from '@/tokens'
+import { useState } from 'react'
+import { componentTokens, fontWeight, colors, fontSize, borderRadius } from '@/tokens'
+import { useFilterStore } from '@/stores/filter-store'
 
 export type Product = {
   id: number
@@ -10,6 +12,11 @@ export type Product = {
 }
 
 export default function ProductCard({ product }: { product: Product }) {
+  const [btnHovered, setBtnHovered] = useState(false)
+
+  const { selectedIds, toggleSelected } = useFilterStore()
+  const isSelected = selectedIds.includes(product.id)
+
   const pc = componentTokens.productCard
 
   return (
@@ -64,6 +71,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.material}
         </span>
 
+        {/* Footer: price + select button */}
         <div
           style={{
             paddingTop: pc.content.footer.paddingTop,
@@ -73,27 +81,56 @@ export default function ProductCard({ product }: { product: Product }) {
             justifyContent: 'space-between',
           }}
         >
-          <span
-            style={{
-              fontSize: pc.content.name.fontSize,
-              fontWeight: fontWeight.semiBold,
-              color: colors.ink,
-            }}
-          >
-            {product.price}
-          </span>
-
-          {!product.inStock && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <span
               style={{
-                fontSize: 11,
-                fontWeight: fontWeight.medium,
-                color: colors.muted,
+                fontSize: pc.content.name.fontSize,
+                fontWeight: fontWeight.semiBold,
+                color: colors.ink,
               }}
             >
-              Out of stock
+              {product.price}
             </span>
-          )}
+            {!product.inStock && (
+              <span
+                style={{
+                  fontSize: fontSize.xs,
+                  fontWeight: fontWeight.medium,
+                  color: colors.muted,
+                }}
+              >
+                Out of stock
+              </span>
+            )}
+          </div>
+
+          <button
+            onClick={() => toggleSelected(product.id)}
+            onMouseEnter={() => setBtnHovered(true)}
+            onMouseLeave={() => setBtnHovered(false)}
+            type="button"
+            style={{
+              height: 30,
+              paddingLeft: 14,
+              paddingRight: 14,
+              borderRadius: borderRadius.input,
+              border: `1px solid ${isSelected ? 'transparent' : colors.ink}`,
+              background: isSelected
+                ? colors.ink
+                : btnHovered
+                ? colors.ink
+                : colors.white,
+              color: isSelected || btnHovered ? colors.white : colors.ink,
+              fontSize: fontSize.small,
+              fontWeight: fontWeight.medium,
+              cursor: 'pointer',
+              transition: 'background 0.15s, color 0.15s, border-color 0.15s',
+              fontFamily: 'inherit',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {isSelected ? 'Selected' : 'Select'}
+          </button>
         </div>
       </div>
     </div>
