@@ -3,8 +3,8 @@ import { Search } from 'lucide-react'
 import { useFilterStore } from '@/stores/filter-store'
 import { componentTokens, colors, spacing } from '@/tokens'
 
-const MATERIALS = ['Stainless Steel', 'Chrome Plated', 'Titanium', 'Carbon Steel']
-const TYPES = ['Safety Razor', 'Cartridge', 'Straight Razor', 'Electric']
+const MATERIALS = ['Chrome', 'Gunmetal', 'White Chrome', 'Rose Gold']
+const TYPES = ['Adjustable', 'Fixed']
 
 // ─── Checkbox ────────────────────────────────────────────────────────────────
 
@@ -252,7 +252,7 @@ export default function FilterPanel() {
           onChange={(e) => setSearch(e.target.value)}
           onFocus={() => setSearchFocused(true)}
           onBlur={() => setSearchFocused(false)}
-          placeholder="Search..."
+          placeholder="Search razors"
           className="search-input"
           style={{
             width: '100%',
@@ -298,7 +298,7 @@ export default function FilterPanel() {
             color: tg.label.color,
           }}
         >
-          In Stock Only
+          In stock only
         </span>
         <Toggle on={inStockOnly} onToggle={toggleInStockOnly} />
       </div>

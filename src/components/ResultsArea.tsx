@@ -209,7 +209,7 @@ export default function ResultsArea({ products }: { products: Product[] }) {
   const activeChips = [
     ...materials.map((m) => ({ key: `material-${m}`, label: m, dismiss: () => toggleMaterial(m) })),
     ...types.map((t) => ({ key: `type-${t}`, label: t, dismiss: () => toggleType(t) })),
-    ...(inStockOnly ? [{ key: 'instock', label: 'In Stock', dismiss: toggleInStockOnly }] : []),
+    ...(inStockOnly ? [{ key: 'instock', label: 'In stock', dismiss: toggleInStockOnly }] : []),
   ]
 
   return (
@@ -225,7 +225,7 @@ export default function ResultsArea({ products }: { products: Product[] }) {
       {/* Toolbar */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <span style={{ fontSize: rt.count.fontSize, fontWeight: rt.count.fontWeight, color: rt.count.color }}>
-          {sortedProducts.length} Results
+          {sortedProducts.length} razors
         </span>
         <SortDropdown />
       </div>

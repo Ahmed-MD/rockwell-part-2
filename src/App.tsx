@@ -4,10 +4,12 @@ import ResultsArea from '@/components/ResultsArea'
 import type { Product } from '@/components/ProductCard'
 
 const products: Product[] = [
-  { id: 1, name: 'Merkur 34C Heavy Duty', material: 'Chrome Plated', type: 'Safety Razor', price: '$42.99', inStock: true },
-  { id: 2, name: 'Parker 99R Long Handle', material: 'Stainless Steel', type: 'Safety Razor', price: '$28.50', inStock: true },
-  { id: 3, name: 'Gillette Fusion ProShield', material: 'Titanium Coated', type: 'Cartridge', price: '$19.99', inStock: false },
-  { id: 4, name: 'Dovo Bismarck Classic', material: 'Carbon Steel', type: 'Straight Razor', price: '$89.00', inStock: true },
+  { id: 1,  name: 'Rockwell 6S Adjustable', material: 'Stainless Steel', type: 'Adjustable', price: '$120', inStock: true },
+  { id: 2,  name: 'Rockwell 6C',            material: 'Chrome',          type: 'Fixed',      price: '$80',  inStock: true },
+  { id: 3,  name: 'Rockwell T2',            material: 'Gunmetal',        type: 'Fixed',      price: '$50',  inStock: true },
+  { id: 4,  name: 'Rockwell R1',            material: 'White Chrome',    type: 'Fixed',      price: '$40',  inStock: true },
+  { id: 5,  name: 'Rockwell Model T',       material: 'Matte Black',     type: 'Adjustable', price: '$150', inStock: true },
+  { id: 6,  name: 'Rockwell 2C',            material: 'Chrome',          type: 'Fixed',      price: '$30',  inStock: true },
 ]
 
 export default function App() {
@@ -46,7 +48,7 @@ export default function App() {
               margin: 0,
             }}
           >
-            Find the perfect razor for your grooming routine.
+            Precision-engineered safety razors. Filter to find your setting.
           </p>
         </div>
       </div>
