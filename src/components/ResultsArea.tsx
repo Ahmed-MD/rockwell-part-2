@@ -182,14 +182,24 @@ function DropdownOption({
 // ─── Results Area ─────────────────────────────────────────────────────────────
 
 export default function ResultsArea({ products }: { products: Product[] }) {
-  const { materials, types, inStockOnly, sortBy, toggleMaterial, toggleType, toggleInStockOnly } =
+  const { search, materials, types, inStockOnly, sortBy, toggleMaterial, toggleType, toggleInStockOnly } =
     useFilterStore()
 
   const rt = componentTokens.resultsToolbar
   const grid = componentTokens.grid
 
+  const filteredProducts = useMemo(() => {
+    return products.filter((p) => {
+      if (search && !p.name.toLowerCase().includes(search.toLowerCase())) return false
+      if (materials.length > 0 && !materials.includes(p.material)) return false
+      if (types.length > 0 && !types.includes(p.type)) return false
+      if (inStockOnly && !p.inStock) return false
+      return true
+    })
+  }, [products, search, materials, types, inStockOnly])
+
   const sortedProducts = useMemo(() => {
-    const arr = [...products]
+    const arr = [...filteredProducts]
     switch (sortBy) {
       case 'featured':
         return arr
@@ -204,7 +214,7 @@ export default function ResultsArea({ products }: { products: Product[] }) {
       default:
         return arr
     }
-  }, [products, sortBy])
+  }, [filteredProducts, sortBy])
 
   const activeChips = [
     ...materials.map((m) => ({ key: `material-${m}`, label: m, dismiss: () => toggleMaterial(m) })),
