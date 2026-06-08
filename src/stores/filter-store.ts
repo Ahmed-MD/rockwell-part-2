@@ -1,16 +1,28 @@
 import { create } from 'zustand'
 
+export type SortOption = 'best_match' | 'price_asc' | 'price_desc' | 'name_asc' | 'name_desc'
+
+export const SORT_LABELS: Record<SortOption, string> = {
+  best_match: 'Best Match',
+  price_asc: 'Price: Low to High',
+  price_desc: 'Price: High to Low',
+  name_asc: 'Name: A–Z',
+  name_desc: 'Name: Z–A',
+}
+
 export type FilterStore = {
   search: string
   materials: string[]
   types: string[]
   inStockOnly: boolean
   selectedIds: number[]
+  sortBy: SortOption
   setSearch: (q: string) => void
   toggleMaterial: (value: string) => void
   toggleType: (value: string) => void
   toggleInStockOnly: () => void
   toggleSelected: (id: number) => void
+  setSortBy: (sort: SortOption) => void
   clearAll: () => void
 }
 
@@ -20,6 +32,7 @@ export const useFilterStore = create<FilterStore>((set) => ({
   types: [],
   inStockOnly: false,
   selectedIds: [],
+  sortBy: 'best_match',
 
   setSearch: (q) => set({ search: q }),
 
@@ -38,6 +51,8 @@ export const useFilterStore = create<FilterStore>((set) => ({
     })),
 
   toggleInStockOnly: () => set((s) => ({ inStockOnly: !s.inStockOnly })),
+
+  setSortBy: (sort) => set({ sortBy: sort }),
 
   toggleSelected: (id) =>
     set((s) => ({
