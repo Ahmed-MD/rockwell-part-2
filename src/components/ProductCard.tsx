@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Check } from 'lucide-react'
 import { componentTokens, fontWeight, colors, fontSize, borderRadius } from '@/tokens'
 import { useFilterStore } from '@/stores/filter-store'
 
@@ -110,6 +111,9 @@ export default function ProductCard({ product }: { product: Product }) {
             onMouseLeave={() => setBtnHovered(false)}
             type="button"
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 5,
               height: 30,
               paddingLeft: 14,
               paddingRight: 14,
@@ -129,6 +133,7 @@ export default function ProductCard({ product }: { product: Product }) {
               whiteSpace: 'nowrap',
             }}
           >
+            {isSelected && <Check size={12} strokeWidth={2.5} style={{ flexShrink: 0 }} />}
             {isSelected ? 'Selected' : 'Select'}
           </button>
         </div>
