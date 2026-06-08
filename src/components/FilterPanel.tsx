@@ -51,21 +51,16 @@ function FilterOptionRow({
   checked: boolean
   onToggle: () => void
 }) {
-  const [hovered, setHovered] = useState(false)
   const fg = componentTokens.filterGroup
 
   return (
     <div
       onClick={onToggle}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         display: 'flex',
         alignItems: 'center',
         gap: 10,
         cursor: 'pointer',
-        opacity: hovered ? 0.7 : 1,
-        transition: 'opacity 0.15s',
       }}
     >
       <CheckboxVisual checked={checked} />
