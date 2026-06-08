@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 
-export type SortOption = 'best_match' | 'price_asc' | 'price_desc' | 'name_asc' | 'name_desc'
+export type SortOption = 'featured' | 'price_asc' | 'price_desc' | 'name_asc' | 'name_desc'
 
 export const SORT_LABELS: Record<SortOption, string> = {
-  best_match: 'Best Match',
+  featured: 'Featured',
   price_asc: 'Price: Low to High',
   price_desc: 'Price: High to Low',
   name_asc: 'Name: A–Z',
@@ -32,7 +32,7 @@ export const useFilterStore = create<FilterStore>((set) => ({
   types: [],
   inStockOnly: false,
   selectedIds: [],
-  sortBy: 'best_match',
+  sortBy: 'featured',
 
   setSearch: (q) => set({ search: q }),
 

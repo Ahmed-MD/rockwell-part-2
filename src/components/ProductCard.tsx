@@ -105,7 +105,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
 
           <button
-            onClick={() => toggleSelected(product.id)}
+            onClick={() => { toggleSelected(product.id); setBtnHovered(false) }}
             onMouseEnter={() => setBtnHovered(true)}
             onMouseLeave={() => setBtnHovered(false)}
             type="button"
@@ -114,7 +114,7 @@ export default function ProductCard({ product }: { product: Product }) {
               paddingLeft: 14,
               paddingRight: 14,
               borderRadius: borderRadius.input,
-              border: `1px solid ${isSelected ? 'transparent' : colors.ink}`,
+              border: `1px solid ${isSelected ? 'transparent' : colors.inputBorder}`,
               background: isSelected
                 ? colors.ink
                 : btnHovered

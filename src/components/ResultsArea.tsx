@@ -4,7 +4,7 @@ import { useFilterStore, SORT_LABELS, type SortOption } from '@/stores/filter-st
 import { componentTokens, colors, spacing, fontSize, fontWeight, borderRadius } from '@/tokens'
 import ProductCard, { type Product } from '@/components/ProductCard'
 
-const SORT_OPTIONS: SortOption[] = ['best_match', 'price_asc', 'price_desc', 'name_asc', 'name_desc']
+const SORT_OPTIONS: SortOption[] = ['featured', 'price_asc', 'price_desc', 'name_asc', 'name_desc']
 
 const parsePrice = (price: string) => parseFloat(price.replace(/[^0-9.]/g, ''))
 
@@ -101,7 +101,7 @@ function SortDropdown() {
         }}
       >
         <span style={{ fontSize: sd.label.fontSize, fontWeight: sd.label.fontWeight, color: sd.label.color, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {sortBy === 'best_match' ? 'Sort by' : SORT_LABELS[sortBy]}
+          {`Sort: ${SORT_LABELS[sortBy]}`}
         </span>
         <ChevronDown
           size={sd.chevron.fontSize}
@@ -191,6 +191,8 @@ export default function ResultsArea({ products }: { products: Product[] }) {
   const sortedProducts = useMemo(() => {
     const arr = [...products]
     switch (sortBy) {
+      case 'featured':
+        return arr
       case 'price_asc':
         return arr.sort((a, b) => parsePrice(a.price) - parsePrice(b.price))
       case 'price_desc':
